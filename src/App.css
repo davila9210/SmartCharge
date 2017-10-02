@@ -1,0 +1,564 @@
+body {
+    margin: 0px;
+}
+html, body, #root, .App, .rightContainer {
+    height: 100%
+}
+.leftContainer {
+    float:left;
+    width: 66.6%
+}
+.rightContainer {
+    margin-left: 66.6%;
+    border-left: 1px solid black;
+}
+.qr {
+    width: 30px;
+}
+
+.iconCircle {
+    width: 70px;
+}
+
+.mapsElement {
+    position: absolute;
+    z-index: 20;
+}
+
+.mapsElement span {
+    position: absolute;
+    left: 0;
+    font-size: 12px;
+    margin-top: 40px;
+    margin-left: 10px;
+    color: #a0a0a0;
+}
+
+
+
+
+
+
+#iPhone {
+    position: absolute;
+    z-index: -1
+}
+#phoneContent {
+    padding-top: 74px;
+    padding-left: 21px;
+    width: 255px;
+}
+#phoneHeader {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    border-bottom: 1px solid #e2e2e2;
+}
+#ethereumLogo {
+    width: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 40px;
+    display: inline-block;
+    float:left;
+}
+#etherBalance {
+    padding-top: 30px;
+    display: inline-block;
+    padding-left: 20px;
+}
+#currStation, #currCar {
+    color: grey;
+    text-align: center;
+    font-size: 12px;
+}
+ #selectAmount {
+    border-top: 1px solid #e2e2e2;
+     padding-left: 10px;
+     padding-top: 10px;
+}
+#selectAmount button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    display: inline-block;
+    font-size: 13px;
+    width: 70px;
+    margin-top: 5px;
+}
+#selectAmount button:not(:first-of-type){
+    margin-left:5px;
+}
+#charging {
+    text-align: center;
+}
+#charging span {
+    margin-top: 30px;
+}
+/* ------------------------ POPUP ------------------------ */
+#overlay {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    bottom: 0;
+    background: #999;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    visibility: hidden;
+    transition: all 1s ease;
+}
+#popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /*background: #fff;*/
+    width: 888px;
+    height: 500px;
+    margin-left: -444px; /*Half the value of width to center div*/
+    margin-top: -250px; /*Half the value of height to center div*/
+    z-index: -1;
+    visibility: hidden;
+    -webkit-transition:width 300ms ease-in-out, height 300ms ease-in-out;
+    -moz-transition:width 300ms ease-in-out, height 300ms ease-in-out;
+    -o-transition:width 300ms ease-in-out, height 300ms ease-in-out;
+    transition:width 300ms ease-in-out, height 300ms ease-in-out;
+}
+#popupclose {
+    float: right;
+    padding: 10px;
+    cursor: pointer;
+}
+.popupContent {
+    overflow: hidden;
+}
+video {
+    margin-top: -5px;
+}
+#button {
+    cursor: pointer;
+}
+@-webkit-keyframes pop-swirl {
+    0% {
+        transform: scale(0) rotate(360deg);
+    }
+
+    60% {
+        transform: scale(0.8) rotate(-10deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+@-moz-keyframes pop-swirl {
+    0% {
+        transform: scale(0) rotate(360deg);
+    }
+
+    60% {
+        transform: scale(0.8) rotate(-10deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+@-ms-keyframes pop-swirl {
+    0% {
+        transform: scale(0) rotate(360deg);
+    }
+
+    60% {
+        transform: scale(0.8) rotate(-10deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+@-o-keyframes pop-swirl {
+    0% {
+        transform: scale(0) rotate(360deg);
+    }
+
+    60% {
+        transform: scale(0.8) rotate(-10deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+@keyframes pop-swirl {
+    0% {
+        transform: scale(0) rotate(360deg);
+    }
+
+    60% {
+        transform: scale(0.8) rotate(-10deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+@-webkit-keyframes anvil {
+    0% {
+        transform: scale(5) rotate(0);
+        opacity: 0;
+        box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+    }
+
+    50% {
+        transform: scale(1) rotate(-0.2deg);
+        opacity: 1;
+        box-shadow: 0 0 0 rgba(241, 241, 241, 0.5);
+    }
+
+    75% {
+        transform: scale(1) rotate(0.2deg);
+        opacity: 1;
+        box-shadow: 0 0 250px rgba(241, 241, 241, 0.5);
+    }
+
+    100% {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+        box-shadow: 0 0 500px rgba(241, 241, 241, 0);
+    }
+}
+@-moz-keyframes anvil {
+    0% {
+        transform: scale(5) rotate(0);
+        opacity: 0;
+        box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+    }
+
+    50% {
+        transform: scale(1) rotate(-0.2deg);
+        opacity: 1;
+        box-shadow: 0 0 0 rgba(241, 241, 241, 0.5);
+    }
+
+    75% {
+        transform: scale(1) rotate(0.2deg);
+        opacity: 1;
+        box-shadow: 0 0 250px rgba(241, 241, 241, 0.5);
+    }
+
+    100% {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+        box-shadow: 0 0 500px rgba(241, 241, 241, 0);
+    }
+}
+@-ms-keyframes anvil {
+    0% {
+        transform: scale(5) rotate(0);
+        opacity: 0;
+        box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+    }
+
+    50% {
+        transform: scale(1) rotate(-0.2deg);
+        opacity: 1;
+        box-shadow: 0 0 0 rgba(241, 241, 241, 0.5);
+    }
+
+    75% {
+        transform: scale(1) rotate(0.2deg);
+        opacity: 1;
+        box-shadow: 0 0 250px rgba(241, 241, 241, 0.5);
+    }
+
+    100% {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+        box-shadow: 0 0 500px rgba(241, 241, 241, 0);
+    }
+}
+@-o-keyframes anvil {
+    0% {
+        transform: scale(5) rotate(0);
+        opacity: 0;
+        box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+    }
+
+    50% {
+        transform: scale(1) rotate(-0.2deg);
+        opacity: 1;
+        box-shadow: 0 0 0 rgba(241, 241, 241, 0.5);
+    }
+
+    75% {
+        transform: scale(1) rotate(0.2deg);
+        opacity: 1;
+        box-shadow: 0 0 250px rgba(241, 241, 241, 0.5);
+    }
+
+    100% {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+        box-shadow: 0 0 500px rgba(241, 241, 241, 0);
+    }
+}
+@keyframes anvil {
+    0% {
+        transform: scale(5) rotate(0);
+        opacity: 0;
+        box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+    }
+
+    50% {
+        transform: scale(1) rotate(-0.2deg);
+        opacity: 1;
+        box-shadow: 0 0 0 rgba(241, 241, 241, 0.5);
+    }
+
+    75% {
+        transform: scale(1) rotate(0.2deg);
+        opacity: 1;
+        box-shadow: 0 0 250px rgba(241, 241, 241, 0.5);
+    }
+
+    100% {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+        box-shadow: 0 0 500px rgba(241, 241, 241, 0);
+    }
+}
+#popup[data-pop="slide-down"] {
+    top: -50%;
+    transition: all .5s ease-in-out;
+}
+#popup[data-pop="slide-down"].show {
+    visibility: visible;
+    z-index: 200;
+    opacity: 1;
+    top: 50%;
+}
+#popup[data-pop="slide-down"].show ~ #overlay {
+    opacity: 1;
+    visibility: visible;
+    z-index: 100;
+}
+#popup[data-pop="pop-in"] {
+    transform: scale(0);
+    transition: all .5s ease-in-out;
+}
+#popup[data-pop="pop-in"].show {
+    transform: scale(1);
+    visibility: visible;
+    z-index: 200;
+    opacity: 1;
+}
+#popup[data-pop="pop-in"].show ~ #overlay {
+    opacity: 1;
+    visibility: visible;
+    z-index: 100;
+}
+#popup[data-pop="pop-swirl"] {
+    transform: scale(0);
+    transition: all .5s ease-in-out;
+}
+#popup[data-pop="pop-swirl"].show {
+    -webkit-animation: pop-swirl 1s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+    visibility: visible;
+    z-index: 200;
+    opacity: 1;
+}
+#popup[data-pop="pop-swirl"].show ~ #overlay {
+    opacity: 1;
+    visibility: visible;
+    z-index: 100;
+}
+#popup[data-pop="anvil"] {
+    transition: all .5s ease-in-out;
+}
+#popup[data-pop="anvil"].show {
+    -webkit-animation: anvil 1s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+    visibility: visible;
+    z-index: 200;
+    opacity: 0.5;
+}
+#popup[data-pop="anvil"].show ~ #overlay {
+    opacity: 0.5;
+    visibility: visible;
+    z-index: 100;
+}
+/** Einde popupo */
+
+
+
+
+
+/** Clock https://codepen.io/nDav/pen/zvPJem */
+body {
+    background: #ccc;
+}
+
+.dial {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    background: #ececec;
+    border: 12px solid #5c5c5c;
+    border-radius: 50%;
+    margin: 8% auto 0;
+    box-shadow: 1px 14px 21px 0 rgba(0,0,0,.2);
+}
+
+span {
+    display: inline-block;
+}
+
+.dot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse 20px 15px at 50% 0, #ececec 40%, #5c5c5c 80%);
+    z-index: 10;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
+}
+
+.min-hand {
+    position: absolute;
+    top: 51px;
+    left: 50%;
+    margin-left: -8px;
+    width: 16px;
+    height: 144px;
+    background: url('https://themegion.github.com/AnalogClock/min.svg') 50% 50% no-repeat;
+    z-index: 7;
+    transform-origin: 50% 124px;
+}
+
+.min-hand.shadow {
+    top: 58px;
+    margin-left: -5px;
+    background-image: url('https://themegion.github.com/AnalogClock/min-shdw.svg');
+    opacity: .1;
+    z-index: 6;
+    filter: blur(2px);
+}
+
+.hour-hand {
+    position: absolute;
+    top: 85px;
+    left: 50%;
+    margin-left: -7px;
+    width: 14px;
+    height: 110px;
+    background: url('https://themegion.github.com/AnalogClock/hour.svg') 50% 50% no-repeat;
+    z-index: 5;
+    transform-origin: 50% 90px;
+}
+
+.hour-hand.shadow {
+    top: 92px;
+    margin-left: -4px;
+    background-image: url('https://themegion.github.com/AnalogClock/hour-shdw.svg');
+    opacity: .1;
+    z-index: 4;
+    filter: blur(2px);
+}
+
+.twelve,
+.three,
+.six,
+.nine {
+    position: absolute;
+    font-family: Lato, sans-serif;
+    font-size: 32px;
+    color: #777;
+}
+
+.twelve {
+    top: 35px;
+    left: 155px;
+}
+
+.three {
+    top: 156px;
+    right: 39px;
+}
+
+.six {
+    left: 165px;
+    bottom: 35px;
+}
+
+.nine {
+    top: 156px;
+    left: 39px;
+}
+
+.date {
+    position: absolute;
+    top: 242px;
+    left: 50%;
+    margin-left: -18px;
+    width: 36px;
+    height: 30px;
+    background: #83837a;
+    border-radius: 6px;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 21px;
+    line-height: 30px;
+    color: white;
+    text-align: center;
+    box-shadow: inset 0 2px 2px 0 rgba(0,0,0,.3), inset 0 -2px 2px 0 rgba(255,255,255,.2);
+}
+
+
+
+
+/** Batteryh */
+.battery{
+    width: 200px;
+    height: 100px;
+    border: 10px solid #717171;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 20%;
+    border-radius: 20px;
+    margin-left: 25px;
+}
+
+.battery:before{
+    content: '';
+    width: 20px;
+    height: 50px;
+    position: absolute;
+    background-color: #717171;
+    border-radius: 5px;
+    top: 27px;
+    left: -26px;
+}
+
+.battery:after{
+    content: '';
+    position: absolute;
+    right: 6px;
+    top: 5px;
+    height: 90px;
+    width: 20px;
+    background-color: #717171;
+    border-radius: 5px;
+    animation: full 5s linear infinite;
+}
+
+@keyframes full{
+    0%{width: 0%;}
+    25%{width: 25%;}
+    50%{width: 50%;}
+    75%{width: 75%;}
+    100%{width: 96%;}
+}
