@@ -69,7 +69,7 @@ class App extends DemoController {
         let popupContent;
         if(!this.state.showMobileApp) {
             popupContent = <video id="videoPlayer" width="890" height="510">
-                <source src="http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_1080p_h264.mov" type="video/mp4" />
+                {/*<source src="http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_1080p_h264.mov" type="video/mp4" />*/}
                 Your browser does not support the video tag.
             </video>;
         }
@@ -125,11 +125,35 @@ class App extends DemoController {
                         accounts={this.state.accounts}
                         FCSdeal={this.state.FCSdeal}
                         registerDevice={this.registerDevice.bind(this)}
+                        deviceID={222}
+                        description={'A12 3'}
+                        domID={'CRG3'}
+                    />
+                    <SmartChargestation
+                        accounts={this.state.accounts}
+                        FCSdeal={this.state.FCSdeal}
+                        registerDevice={this.registerDevice.bind(this)}
                         deviceID={143}
-                        description={'A12'}
+                        description={'A12 2'}
+                        domID={'CRG2'}
+                    />
+                    <SmartChargestation
+                        accounts={this.state.accounts}
+                        FCSdeal={this.state.FCSdeal}
+                        registerDevice={this.registerDevice.bind(this)}
+                        deviceID={444}
+                        description={'A12 1'}
                         domID={'CRG1'}
                     />
-                    <User domID={'USR1'} />
+                    <User
+                        domID={'USR1'}
+                    />
+                    <User
+                        domID={'USR2'}
+                    />
+                    <User
+                        domID={'USR3'}
+                    />
                     <GoogleMaps />
                 </div>
                 <div className="rightContainer">

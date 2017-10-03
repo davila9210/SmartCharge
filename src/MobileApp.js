@@ -69,7 +69,7 @@ class MobileApp extends Component {
             </div>;
         }
         else {
-            phoneContent = <div>Stopped charging</div>
+            phoneContent = <div>You're ready to go!</div>
         }
         return <div>
             <img id="iPhone" src="img/iphone.png" alt="iphone" />
@@ -102,6 +102,8 @@ class MobileApp extends Component {
         // console.log(this.stationInfo[1]);
         // console.log(this.dso.price);
         // console.log(this.stationInfo[0].c[0]);
+        let lineId = this.props.chargeStation.description.slice(-1);
+        document.getElementById('chargeLine' + lineId).style.display = 'block';
 
         let chargeAmount = document.getElementById('chargeAmount').value;
         let self = this;
@@ -110,7 +112,8 @@ class MobileApp extends Component {
             { from: this.props.account, gas: 1000000, value: this.props.web3.toWei("1") }).then(function(transactionDetails){
                 console.log(transactionDetails);
                 // Show display; car is charging now
-                self.props.FCSdeal.StopCharge(function(error, result){
+                let watch = self.props.FCSdeal.StopCharge(function(error, result){
+                    watch.stopWatching();
                     console.log('change display because stopped charging');
                     console.log(result);
                     self.setState({

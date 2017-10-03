@@ -20,6 +20,10 @@ html, body, #root, .App, .rightContainer {
     width: 70px;
 }
 
+.iconCircleSmall {
+    width: 40px;
+}
+
 .mapsElement {
     position: absolute;
     z-index: 20;
@@ -35,10 +39,18 @@ html, body, #root, .App, .rightContainer {
 }
 
 
+.chargeLine {
+    display: none;
+}
+
+#USR1real, #USR2real, #USR3real{
+    transition: 10s;
+}
 
 
 
 
+/** app content */
 #iPhone {
     position: absolute;
     z-index: -1
