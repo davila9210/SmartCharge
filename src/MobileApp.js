@@ -8,7 +8,8 @@ class MobileApp extends Component {
         this.dso = this.getDSOinfo();
         this.state = {
             balance: this.props.web3.eth.getBalance(this.props.account),
-            step: 0
+            step: 0,
+            chargeAmount: 5
         };
         this.props.registerDevice({
             type: 'CustomerApp',
@@ -39,25 +40,27 @@ class MobileApp extends Component {
         if(this.state.step === 0) {
             let sourceElements = this.sources.map(function (source, t) {
                 return <div key={t}>
-                    <button onClick={self.chooseSource.bind(self, source)}>{source.price + self.dso.price}
-                        - {source.description}</button>
+                    <button className="source" onClick={self.chooseSource.bind(self, source)}>{source.description}<br />
+                        {(self.state.chargeAmount * source.price).toFixed(2) + ' (' + source.price + '/kwh)'}</button>
                 </div>
             });
 
             phoneContent = <div>
                 <img id="ethereumLogo" src="img/ethereumlogo.png" alt="ethereumLogo" />
-                <span id="etherBalance">{Math.round(this.props.web3.fromWei(this.state.balance, "ether")) / 100 + " ether"}</span>
-                <div style={{clear:'both'}}>
-                    <div id="currStation">Current charge station: {this.props.chargeStation.description}</div>
-                    <div id="currCar">Selected car: Volvo C30 - 24 kWh</div>
+                <span id="etherBalance">{this.props.web3.fromWei(this.state.balance, "ether").toFixed(2) + " ether"}</span>
+                <div style={{clear:'both',textAlign: 'center'}}>
+                    <div className="appDetailText" id="currStation">Current charge station: {this.props.chargeStation.description}</div>
+                    <div className="appDetailText" id="currCar">Selected car: Volvo C30 - 24 kWh</div>
                     <div id="selectAmount">
-                        Select current car status:<br />
-                        <button>(Almost)<br />empty</button>
-                        <button>Half<br />full</button>
-                        <button>(Almost)<br />full</button>
+                        How far do you want to drive?:<br />
+                        <input id="slider" type="range" min="0" max="400" step="10" onChange={this.sliderChanged.bind(this)}/>
+                        <span id="sliderOutput">50</span> km
+                        {/*<button>(Almost)<br />empty</button>*/}
+                        {/*<button>Half<br />full</button>*/}
+                        {/*<button>(Almost)<br />full</button>*/}
+                        <div className="appDetailText">You car will get <span id="chargeAmount">5</span> kwh</div>
                     </div>
-                    Current DSO price: {this.dso.price}<br/>
-                    You want to charge for <input id="chargeAmount" size="10"/> kwh
+                    <br />Current DSO price: {this.dso.price}<br/><br/>
                     {sourceElements}
                 </div>
             </div>
@@ -78,6 +81,15 @@ class MobileApp extends Component {
                 {phoneContent}
             </div>
         </div>
+    }
+
+    sliderChanged(){
+        let chosenValue = document.getElementById('slider').value;
+        document.getElementById('sliderOutput').innerHTML = chosenValue;
+        document.getElementById('chargeAmount').innerHTML = chosenValue / 10;
+        this.setState({
+            chargeAmount: chosenValue / 10
+        })
     }
 
     /**
@@ -104,16 +116,19 @@ class MobileApp extends Component {
         // console.log(this.stationInfo[0].c[0]);
         let lineId = this.props.chargeStation.description.slice(-1);
         document.getElementById('chargeLine' + lineId).style.display = 'block';
+        document.getElementById('playButton2').style.display = 'inline-block';
 
-        let chargeAmount = document.getElementById('chargeAmount').value;
+        let chargeAmount = document.getElementById('slider').value / 10;
+        let price = chosenSource.price * chargeAmount;
         let self = this;
         this.props.FCSdeal.newDeal(chosenSource.contractAddress, chosenSource.price, chosenSource.supplier,
             this.stationInfo[1], this.dso.price, this.props.chargeStation.id, this.stationInfo[0], chargeAmount,
-            { from: this.props.account, gas: 1000000, value: this.props.web3.toWei("1") }).then(function(transactionDetails){
+            { from: this.props.account, gas: 1000000, value: this.props.web3.toWei(price) }).then(function(transactionDetails){
                 console.log(transactionDetails);
                 // Show display; car is charging now
                 let watch = self.props.FCSdeal.StopCharge(function(error, result){
                     watch.stopWatching();
+                    document.getElementById('chargeLine' + lineId).style.display = 'none';
                     console.log('change display because stopped charging');
                     console.log(result);
                     self.setState({

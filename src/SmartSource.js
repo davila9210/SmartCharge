@@ -119,7 +119,7 @@ class SmartSource extends Component {
                 cx = -18;
                 cy = 140;
             }
-            lines[i] = <div className="chargeLine" id={"chargeLine"+i} key={i} style={{padding:'0px',margin:'0px',height:"5px",backgroundColor:"#0F0",lineHeight:'1px', position:'absolute', left:cx+'px', top: cy + "px", width: length + "px", MozTransform:"rotate(" + angle + "deg)", WebkitTransform: "rotate(" + angle + "deg)", OTransform:"rotate(" + angle + "deg)", msTransform:"rotate(" + angle + "deg)", transform:"rotate(" + angle + "deg)"}} />;
+            lines[i] = <div className="chargeLine" id={"chargeLine"+i} key={i} style={{padding:'0px',margin:'0px',height:"5px",borderTop:"7px dashed #1eb71e",lineHeight:'1px', position:'absolute', left:cx+'px', top: cy + "px", width: length + "px", MozTransform:"rotate(" + angle + "deg)", WebkitTransform: "rotate(" + angle + "deg)", OTransform:"rotate(" + angle + "deg)", msTransform:"rotate(" + angle + "deg)", transform:"rotate(" + angle + "deg)"}} />;
             // lines[i] = <div style={{padding:'0px',margin:'0px',height:"5px",backgroundColor:"#0F0",lineHeight:'1px', position:'absolute', width: length + "px", MozTransform:"rotate(" + angle + "deg)", WebkitTransform: "rotate(" + angle + "deg)", OTransform:"rotate(" + angle + "deg)", msTransform:"rotate(" + angle + "deg)", transform:"rotate(" + angle + "deg)"}} />;
         }
         return lines;

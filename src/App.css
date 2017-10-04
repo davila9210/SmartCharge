@@ -47,6 +47,21 @@ html, body, #root, .App, .rightContainer {
     transition: 10s;
 }
 
+/*#playButton2, #playButton3 {*/
+    /*display: none;*/
+/*}*/
+
+button.source {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    display: inline-block;
+    font-size: 13px;
+    width: 150px;
+    margin-top: 5px;
+}
+
+
 
 
 
@@ -79,9 +94,8 @@ html, body, #root, .App, .rightContainer {
     display: inline-block;
     padding-left: 20px;
 }
-#currStation, #currCar {
+.appDetailText {
     color: grey;
-    text-align: center;
     font-size: 12px;
 }
  #selectAmount {
@@ -89,7 +103,7 @@ html, body, #root, .App, .rightContainer {
      padding-left: 10px;
      padding-top: 10px;
 }
-#selectAmount button {
+#selectAmount button { /* remove*/
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -98,7 +112,7 @@ html, body, #root, .App, .rightContainer {
     width: 70px;
     margin-top: 5px;
 }
-#selectAmount button:not(:first-of-type){
+#selectAmount button:not(:first-of-type){ /* remove*/
     margin-left:5px;
 }
 #charging {

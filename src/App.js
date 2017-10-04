@@ -126,7 +126,7 @@ class App extends DemoController {
                         FCSdeal={this.state.FCSdeal}
                         registerDevice={this.registerDevice.bind(this)}
                         deviceID={222}
-                        description={'A12 3'}
+                        description={'A12 Connection 3'}
                         domID={'CRG3'}
                     />
                     <SmartChargestation
@@ -134,7 +134,7 @@ class App extends DemoController {
                         FCSdeal={this.state.FCSdeal}
                         registerDevice={this.registerDevice.bind(this)}
                         deviceID={143}
-                        description={'A12 2'}
+                        description={'A12 Connection 2'}
                         domID={'CRG2'}
                     />
                     <SmartChargestation
@@ -142,7 +142,7 @@ class App extends DemoController {
                         FCSdeal={this.state.FCSdeal}
                         registerDevice={this.registerDevice.bind(this)}
                         deviceID={444}
-                        description={'A12 1'}
+                        description={'A12 Connection 1'}
                         domID={'CRG1'}
                     />
                     <User
@@ -157,8 +157,9 @@ class App extends DemoController {
                     <GoogleMaps />
                 </div>
                 <div className="rightContainer">
-                    {this.state.currentTime.format('MMMM Do YYYY H:mm')}
-                    <button id="playButton" onClick={this.playNow.bind(this)}>Play demo</button>
+                    <button id="playButton" onClick={this.playNow.bind(this)}>Demo - Car 1</button>
+                    <button id="playButton2" onClick={this.popupCar2.bind(this)}>Demo - Car 2</button>
+                    <button id="playButton3" onClick={this.playCar3.bind(this)}>Demo - Car 3</button>
                     <button onClick={this.popupWindow.bind(this)} id="button">Show app instant</button>
                     {regDevices}
                     <button onClick={this.retrieveChargestations.bind(this)}>Retrieve registered charge stations</button>
