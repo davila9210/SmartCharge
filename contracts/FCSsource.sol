@@ -11,7 +11,7 @@ contract FCSsource {
         uint chargestationId;
     }
     mapping(uint => saleDeal) public saleDeals; // uint = dealid
-    uint[] activeDeals;
+    uint[] public activeDeals;
 
     uint public impossibleDeliveries;
 
@@ -68,7 +68,54 @@ contract FCSsource {
     }
 
     function stopSaleDeal(uint dealId) public {
-        delete activeDeals[dealId];
+        uint indexOfDeal = getDeal(dealId);
+        activeDeals = removeFromArray(activeDeals, indexOfDeal);
+    }
+
+    function getDeal(uint dealId) constant returns (uint) {
+        uint indexOfDeal = 999999999999;
+        for (uint i = 0; i < activeDeals.length; i++) {
+            if(activeDeals[i] == dealId) {
+                indexOfDeal = i;
+            }
+        }
+        return indexOfDeal;
+    }
+
+//    function removeFromArray(uint[] array, uint index) internal returns(uint[]) {
+//        if (index >= array.length) return;
+//
+//        for (uint i = index; i<array.length-1; i++){
+//            array[i] = array[i+1];
+//        }
+//        delete array[array.length-1];
+//        array.length--;
+//        return array;
+//    }
+    function removeFromArray(uint[] array, uint index) internal returns(uint[] value) {
+        if (index >= array.length) return;
+
+        uint[] memory arrayNew = new uint[](array.length-1);
+        for (uint i = 0; i<arrayNew.length; i++){
+            if(i != index && i<index){
+                arrayNew[i] = array[i];
+            } else {
+                arrayNew[i] = array[i+1];
+            }
+        }
+        delete array;
+        return arrayNew;
+    }
+
+    function activeDealsLength() constant returns (uint) { // TODO not used
+        return activeDeals.length;
+    }
+    function activeDealInfo(uint aaa) constant returns (uint) { // TODO not used
+        return activeDeals[aaa];
+    }
+
+    function getDealInfo(uint dealId) constant returns (uint) { // TODO not used
+        return saleDeals[dealId].chargestationId;
     }
 }
 

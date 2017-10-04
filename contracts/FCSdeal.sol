@@ -86,7 +86,7 @@ contract FCSdeal {
         dealIndex.push(dealIndex.length);
     }
 
-    function finishDeal(uint dealId, uint endValueStation) {
+    function finishDeal(uint dealId, uint endValueStation) public {
         deal currentDeal = deals[dealId];
         //Deregister at source
         FCSsource(currentDeal.source).stopSaleDeal(dealId);
