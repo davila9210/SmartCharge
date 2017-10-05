@@ -16,8 +16,8 @@ contract FCSsource {
     uint public impossibleDeliveries;
 
     event DropUser(
-        uint val1,
-        uint val2
+        uint dealId,
+        uint chargestationId
     );
 
     function FCSsource(address _supplier) public {
@@ -52,7 +52,7 @@ contract FCSsource {
             impossibleDeliveries = 0;
         }
         if(impossibleDeliveries > 3) {
-            DropUser(sumDeals, oldestDeal);
+            DropUser(oldestDeal, saleDeals[oldestDeal].chargestationId);
         }
         return availableNow;
     }

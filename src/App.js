@@ -1,7 +1,7 @@
 import React from 'react'
 import FCSdealJSON from '../build/contracts/FCSdeal.json'
 import getWeb3 from './utils/getWeb3'
-import DemoController from './DemoController';
+import DemoController from './DemoControllers/DemoControllerApp';
 import SmartSource from './SmartSource';
 import SmartChargestation from './SmartChargestation';
 import MobileApp from './MobileApp';
@@ -22,7 +22,7 @@ class App extends DemoController {
             accounts: null,
             FCSdeal: null,
             registeredDevices: [],
-            currentTime: moment.unix(1505653200-7200),//1501574400,
+            currentTime: moment.unix(1505646000),
             showMobileApp: false
         }
     }
@@ -182,16 +182,16 @@ class App extends DemoController {
                     <button onClick={this.retrieveSmartSources.bind(this)}>Retrieve suppliers</button>
                     <br />
                     <div className="dial">
-                        <div className="dot"></div>
-                        <div className="min-hand"></div>
-                        <div className="min-hand shadow"></div>
-                        <div className="hour-hand"></div>
-                        <div className="hour-hand shadow"></div>
+                        <div className="dot" />
+                        <div className="min-hand" />
+                        <div className="min-hand shadow" />
+                        <div className="hour-hand" />
+                        <div className="hour-hand shadow" />
                         <span className="twelve">12</span>
                         <span className="three">3</span>
                         <span className="six">6</span>
                         <span className="nine">9</span>
-                        <div className="date"></div>
+                        <div className="date" />
                     </div>
                 </div>
             </div>

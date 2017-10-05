@@ -127,8 +127,13 @@ class MobileApp extends Component {
                 console.log(transactionDetails);
                 // Listen to source (might not be available supply)
                 chosenSource.contract.DropUser(function(error, result) {
-                    console.log('DROPPING!'); //TODO implement falling back to second source
-                    console.log(result.args);
+                    if(result.args.chargestationId.c[0] === self.props.chargeStation.id) {
+                        console.log('DROPPING!');
+                        let lineId = self.props.chargeStation.description.slice(-1);
+                        document.getElementById('chargeLine' + lineId).style.borderTop = '7px dashed red';
+                        document.getElementById('chargeLineBackup').style.display = 'block';
+                        //TODO switch from source (enddeal + newdeal)
+                    }
                 });
                 // Listen to when charge stations stops
                 let watch = self.props.FCSdeal.StopCharge(function(error, result){

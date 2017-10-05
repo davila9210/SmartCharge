@@ -1,4 +1,4 @@
-import { Component } from 'react'; //React,
+import { Component } from 'react';
 import _ from 'underscore';
 
 class DemoController extends Component {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
-const AnyReactComponent = ({ domID }) => <div id={domID}>aaaaaaaaaa</div>;
+const AnyReactComponent = ({ domID }) => <div id={domID} />;
 
 class GoogleMaps extends Component {
     static defaultProps = {
