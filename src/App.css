@@ -11,6 +11,7 @@ html, body, #root, .App, .rightContainer {
 .rightContainer {
     margin-left: 66.6%;
     border-left: 1px solid black;
+    text-align: center;
 }
 .qr {
     width: 30px;
@@ -69,6 +70,21 @@ button.source {
     margin-top: -207px;
     margin-left: -40px;
     display: none;
+}
+
+.rightContainer button {
+    background-color: #ececec;
+    color: black;
+    display: inline-block;
+    font-size: 13px;
+    width: 100px;
+    margin-top: 40px;
+    border: 2px solid #5c5c5c;
+    margin-left: 10px;
+    border-radius: 10px;
+}
+.rightContainer button.last {
+    margin-bottom: 40px;
 }
 
 .lageOpwek {
@@ -435,7 +451,7 @@ video {
 
 /** Clock https://codepen.io/nDav/pen/zvPJem */
 body {
-    background: #ccc;
+    background: #d7d7da;
 }
 
 .dial {

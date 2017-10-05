@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import FCSsourceJSON from '../build/contracts/FCSsource.json'
 import DemoControllerSource from './DemoControllers/DemoControllerSource';
 

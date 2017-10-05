@@ -26,7 +26,7 @@ class SmartChargestation extends Component {
     }
 
     startCharging(amount, dealId) {
-        console.log(this.props.deviceID + ' start charging for ' + amount + ' kwh for deal' + dealId);
+        console.log('Charge station' + this.props.deviceID + ' starts charging for ' + amount + ' kwh for deal ' + dealId);
         this.chargeSession = {
             stopAt: this.state.kWhValue + amount,
             dealId: dealId

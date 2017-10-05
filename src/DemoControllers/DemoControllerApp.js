@@ -17,7 +17,7 @@ class DemoController extends Component {
 
     playNow() {
         document.getElementById('playButton').style.display = 'none';
-        console.log('start moving car visually, takes 10 seconds (2 real life minutes)');
+        console.log('Car 1 moving (10 sec)');
         let chargeElement = document.getElementById('CRG1').getBoundingClientRect();
         document.getElementById('USR1real').style.top = chargeElement.y - 35 + 'px';
         document.getElementById('USR1real').style.left = chargeElement.x + 15 + 'px';
@@ -28,13 +28,13 @@ class DemoController extends Component {
         document.getElementById('overlay').className = 'show';
         document.getElementById('popup').className = 'show';
         document.getElementById('videoPlayer').play();
-        console.log('vid screen');
+        console.log('Video screen');
         setTimeout(this.popupWindow.bind(this), 8000)
         //new react component
     }
 
     popupWindow() {
-        console.log('popup');
+        console.log('iPhone app - car 1');
         document.getElementById('videoPlayer').pause();
         document.getElementById('overlay').className = 'show';
         document.getElementById('popup').className = 'show';
@@ -55,7 +55,7 @@ class DemoController extends Component {
 
     playCar2() {
         document.getElementById('playButton2').style.display = 'none';
-        console.log('car2 moving 10 sec');
+        console.log('Car 2 moving (10 sec)');
         let chargeElement = document.getElementById('CRG2').getBoundingClientRect();
         document.getElementById('USR2real').style.top = chargeElement.y - 15 + 'px';
         document.getElementById('USR2real').style.left = chargeElement.x + 25 + 'px';
@@ -63,7 +63,7 @@ class DemoController extends Component {
     }
 
     popupCar2() {
-        console.log('popup car2');
+        console.log('iPhone app - car 1');
         this.currentChargeStation = _.filter(this.state.registeredDevices, {type: 'SmartChargestation'});
         this.currentChargeStation = _.find(this.currentChargeStation, {id: 143});
         this.setState({
@@ -79,7 +79,7 @@ class DemoController extends Component {
 
     playCar3() {
         document.getElementById('playButton3').style.display = 'none';
-        console.log('car3 moving 10 sec');
+        console.log('Car 3 moving (10 sec)');
         let chargeElement = document.getElementById('CRG3').getBoundingClientRect();
         document.getElementById('USR3real').style.top = chargeElement.y - 15 + 'px';
         document.getElementById('USR3real').style.left = chargeElement.x + 25 + 'px';
@@ -87,7 +87,7 @@ class DemoController extends Component {
     }
 
     popupCar3() {
-        console.log('popup car3');
+        console.log('iPhone app - car 3');
         this.currentChargeStation = _.filter(this.state.registeredDevices, {type: 'SmartChargestation'});
         this.currentChargeStation = _.find(this.currentChargeStation, {id: 222});
         this.setState({

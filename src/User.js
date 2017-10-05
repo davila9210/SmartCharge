@@ -20,7 +20,7 @@ class User extends Component {
             this.rendered++;
         }
         else if(this.rendered === 3){
-            console.log('ready');
+            console.log('Ready');
             this.rendered++;
         }
     }

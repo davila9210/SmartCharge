@@ -50,7 +50,7 @@ class App extends DemoController {
         let self = this;
 
         FCSdeal.deployed().then((instance) => {
-            console.log('FCSdeal at ' + FCSdeal.address);
+            console.log('FCSdeal was deployed at ' + FCSdeal.address);
             self.setState({
                 FCSdeal: instance
             })
@@ -173,13 +173,12 @@ class App extends DemoController {
                     <GoogleMaps />
                 </div>
                 <div className="rightContainer">
-                    <button id="playButton" onClick={this.playNow.bind(this)}>Demo - Car 1</button>
-                    <button id="playButton2" onClick={this.popupCar2.bind(this)}>Demo - Car 2</button>
-                    <button id="playButton3" onClick={this.popupCar3.bind(this)}>Demo - Car 3</button>
-                    <button onClick={this.popupWindow.bind(this)} id="button">Show app instant</button>
+                    <button id="playButton" onClick={this.popupWindow.bind(this)}>Start car 1</button>
+                    <button id="playButton2" onClick={this.popupCar2.bind(this)}>Start car 2</button>
+                    <button id="playButton3" className="last" onClick={this.popupCar3.bind(this)}>Start car 3</button>
                     {regDevices}
-                    <button onClick={this.retrieveChargestations.bind(this)}>Retrieve registered charge stations</button>
-                    <button onClick={this.retrieveSmartSources.bind(this)}>Retrieve suppliers</button>
+                    <button style={{width:'300px'}} onClick={this.retrieveChargestations.bind(this)}>Retrieve registered charge stations</button>
+                    <button style={{width:'300px'}} onClick={this.retrieveSmartSources.bind(this)}>Retrieve suppliers</button>
                     <br />
                     <div className="dial">
                         <div className="dot" />

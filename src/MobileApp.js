@@ -105,15 +105,6 @@ class MobileApp extends Component {
      * document.getElementById('chargeAmount').value is chargeAmount (how many kwh)
      */
     chooseSource(chosenSource) {
-        // console.log(this.props.chargeStation);
-        // console.log(chosenSource);
-        //
-        // console.log(chosenSource.contractAddress);
-        // console.log(chosenSource.price);
-        // console.log(chosenSource.supplier);
-        // console.log(this.stationInfo[1]);
-        // console.log(this.dso.price);
-        // console.log(this.stationInfo[0].c[0]);
         let lineId = this.props.chargeStation.description.slice(-1);
         document.getElementById('chargeLine' + lineId).style.display = 'block';
         document.getElementById('playButton2').style.display = 'inline-block';
@@ -128,7 +119,8 @@ class MobileApp extends Component {
                 // Listen to source (might not be available supply)
                 chosenSource.contract.DropUser(function(error, result) {
                     if(result.args.chargestationId.c[0] === self.props.chargeStation.id) {
-                        console.log('DROPPING!');
+                        console.log('Dropping user! ' + self.props.chargeStation.id + ' not generating enough energy');
+                        console.log('Falling back to 2nd source');
                         let lineId = self.props.chargeStation.description.slice(-1);
                         document.getElementById('chargeLine' + lineId).style.borderTop = '7px dashed red';
                         document.getElementById('chargeLineBackup').style.display = 'block';
@@ -139,21 +131,30 @@ class MobileApp extends Component {
                 let watch = self.props.FCSdeal.StopCharge(function(error, result){
                     watch.stopWatching();
                     document.getElementById('chargeLine' + lineId).style.display = 'none';
-                    console.log('change display because stopped charging');
                     console.log(result);
-                    self.setState({
-                        step: 2,
-                        stepInfo: {
-                            chargedAt: result.args.chargeStation,
-                            newValue: result.args.endValueStation
-                        }
-                    })
+                    if(self._mounted) {
+                        self.setState({
+                            step: 2,
+                            stepInfo: {
+                                chargedAt: result.args.chargeStation,
+                                newValue: result.args.endValueStation
+                            }
+                        })
+                    }
                 });
                 // Show display; car is charging now
                 self.setState({
                     step: 1
                 })
             });
+    }
+
+    componentDidMount() {
+        this._mounted = true;
+    }
+
+    componentWillUnmount() {
+        this._mounted = false;
     }
 }
 
