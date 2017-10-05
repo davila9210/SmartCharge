@@ -33,6 +33,11 @@ class GoogleMaps extends Component {
                     domID={'SUP3'}
                 />
                 <AnyReactComponent
+                    lat={51.935630}
+                    lng={5.808477}
+                    domID={'SUP4'}
+                />
+                <AnyReactComponent
                     lat={51.997000}
                     lng={5.870495}
                     domID={'CRG1'}

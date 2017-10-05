@@ -12,7 +12,7 @@ class SmartChargestation extends Component {
             id: this.props.deviceID
         });
         this.props.FCSdeal.registerChargestation(this.props.deviceID, "http://www.DSO.ext/API/price/" + this.props.deviceID, { from: this.props.accounts[0] }); //this.props.deviceID, 1501574400, this.state.kWhValue, { from: this.props.accounts[0], gasLimit: 6706583 });
-        this.props.FCSdeal.newMeterValue(this.props.deviceID, 1501574400, this.state.kWhValue, { from: this.props.accounts[0] });
+        this.props.FCSdeal.newMeterValue(this.props.deviceID, this.props.currentTime.valueOf(), this.state.kWhValue, { from: this.props.accounts[0] });
     }
 
     componentDidMount() {
@@ -45,7 +45,7 @@ class SmartChargestation extends Component {
             this.props.FCSdeal.finishDeal(this.chargeSession.dealId, newValue, { from: this.props.accounts[0] });
             this.chargeSession = null;
         }
-        this.props.FCSdeal.newMeterValue(this.props.deviceID, 9, newValue, { from: this.props.accounts[0] });
+        this.props.FCSdeal.newMeterValue(this.props.deviceID, this.props.currentTime.valueOf(), newValue, { from: this.props.accounts[0] });
         this.setState({
             kWhValue: newValue
         });

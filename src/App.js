@@ -50,6 +50,7 @@ class App extends DemoController {
         let self = this;
 
         FCSdeal.deployed().then((instance) => {
+            console.log('FCSdeal at ' + FCSdeal.address);
             self.setState({
                 FCSdeal: instance
             })
@@ -101,17 +102,10 @@ class App extends DemoController {
                         web3={this.state.web3}
                         accounts={this.state.accounts}
                         registerDevice={this.registerDevice.bind(this)}
-                        description={'Green solar'}
-                        type={"solar"}
-                        domID={'SUP1'}
-                    />
-                    <SmartSource
-                        web3={this.state.web3}
-                        accounts={this.state.accounts}
-                        registerDevice={this.registerDevice.bind(this)}
                         description={'Grey Duiven'}
                         type={"grey"}
                         domID={'SUP2'}
+                        currentTime={this.state.currentTime}
                     />
                     <SmartSource
                         web3={this.state.web3}
@@ -120,6 +114,25 @@ class App extends DemoController {
                         description={'Wind Aam'}
                         type={"wind"}
                         domID={'SUP3'}
+                        currentTime={this.state.currentTime}
+                    />
+                    <SmartSource
+                        web3={this.state.web3}
+                        accounts={this.state.accounts}
+                        registerDevice={this.registerDevice.bind(this)}
+                        description={'Solar Driel'}
+                        type={"solar"}
+                        domID={'SUP4'}
+                        currentTime={this.state.currentTime}
+                    />
+                    <SmartSource
+                        web3={this.state.web3}
+                        accounts={this.state.accounts}
+                        registerDevice={this.registerDevice.bind(this)}
+                        description={'Green solar'}
+                        type={"solar"}
+                        domID={'SUP1'}
+                        currentTime={this.state.currentTime}
                     />
                     <SmartChargestation
                         accounts={this.state.accounts}
@@ -128,6 +141,7 @@ class App extends DemoController {
                         deviceID={222}
                         description={'A12 Connection 3'}
                         domID={'CRG3'}
+                        currentTime={this.state.currentTime}
                     />
                     <SmartChargestation
                         accounts={this.state.accounts}
@@ -136,6 +150,7 @@ class App extends DemoController {
                         deviceID={143}
                         description={'A12 Connection 2'}
                         domID={'CRG2'}
+                        currentTime={this.state.currentTime}
                     />
                     <SmartChargestation
                         accounts={this.state.accounts}
@@ -144,6 +159,7 @@ class App extends DemoController {
                         deviceID={444}
                         description={'A12 Connection 1'}
                         domID={'CRG1'}
+                        currentTime={this.state.currentTime}
                     />
                     <User
                         domID={'USR1'}
@@ -159,7 +175,7 @@ class App extends DemoController {
                 <div className="rightContainer">
                     <button id="playButton" onClick={this.playNow.bind(this)}>Demo - Car 1</button>
                     <button id="playButton2" onClick={this.popupCar2.bind(this)}>Demo - Car 2</button>
-                    <button id="playButton3" onClick={this.playCar3.bind(this)}>Demo - Car 3</button>
+                    <button id="playButton3" onClick={this.popupCar3.bind(this)}>Demo - Car 3</button>
                     <button onClick={this.popupWindow.bind(this)} id="button">Show app instant</button>
                     {regDevices}
                     <button onClick={this.retrieveChargestations.bind(this)}>Retrieve registered charge stations</button>
@@ -231,7 +247,9 @@ class App extends DemoController {
     retrieveSmartSources() {
         let smartSources = _.where(this.state.registeredDevices, { type: 'SmartSource' });
         _.each(smartSources, function(smartSource) {
-            console.log(smartSource.contract.getLastMeterValue.call());
+            console.log(smartSource.contractAddress);
+            console.log(smartSource.contract.getLastMeterValue.call().c[0]);
+            console.log(smartSource.contract.activeDealsLength.call().c[0]);
         });
     }
 }

@@ -125,7 +125,12 @@ class MobileApp extends Component {
             this.stationInfo[1], this.dso.price, this.props.chargeStation.id, this.stationInfo[0], chargeAmount,
             { from: this.props.account, gas: 1000000, value: this.props.web3.toWei(price) }).then(function(transactionDetails){
                 console.log(transactionDetails);
-                // Show display; car is charging now
+                // Listen to source (might not be available supply)
+                chosenSource.contract.DropUser(function(error, result) {
+                    console.log('DROPPING!'); //TODO implement falling back to second source
+                    console.log(result.args);
+                });
+                // Listen to when charge stations stops
                 let watch = self.props.FCSdeal.StopCharge(function(error, result){
                     watch.stopWatching();
                     document.getElementById('chargeLine' + lineId).style.display = 'none';
@@ -139,6 +144,7 @@ class MobileApp extends Component {
                         }
                     })
                 });
+                // Show display; car is charging now
                 self.setState({
                     step: 1
                 })

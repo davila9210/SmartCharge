@@ -8,6 +8,9 @@ class SmartSource extends Component {
             kWhValue: Math.floor(Math.random() * 500) + 1000,
             htmlLine: null
         }
+        this.standardIncrease = 50;
+        this.variableIncrease = 30;
+        this.extraClass = '';
     }
 
     deployContract() {
@@ -23,6 +26,12 @@ class SmartSource extends Component {
             gas: gasEstimate + 100000
         }, function(err, myContract){
             if(!err && myContract.address) {
+                // myContract.DropUser(function(error, result) {
+                //     if (!error) {
+                //         console.log('wafdag2!' + myContract.address);
+                //         console.log(result);
+                //     }
+                // });
                 self.props.registerDevice({
                     type: 'SmartSource',
                     contractAddress: myContract.address,
@@ -34,7 +43,7 @@ class SmartSource extends Component {
                 });
                 // self.state.contract = myContract;
                 // self.forceUpdate();
-                myContract.newMeterValue(3, self.state.kWhValue, { from: self.props.accounts[0] });
+                myContract.newMeterValue(self.props.currentTime.valueOf(), self.state.kWhValue, { from: self.props.accounts[0] });
             }
             else if(err) {
                 console.log('error deploying smart source contract: ' + err)
@@ -47,11 +56,19 @@ class SmartSource extends Component {
             return null;
         }
 
-        return <div id={this.props.domID + 'real'} className="mapsElement">
-            <img className="iconCircle" src={"img/"+this.props.type+".png"} alt="Solarpanel" />
+        return <div id={this.props.domID + 'real'} className={"mapsElement " + this.extraClass}>
+            <img onClick={this.clickedSource.bind(this)} className="iconCircle" src={"img/"+this.props.type+".png"} alt="Solarpanel" />
             <span>{this.state.kWhValue} kwh</span>
             {this.htmlLine}
         </div>;
+    }
+
+    clickedSource() {
+        console.log('Clicked source - supply to 2kwh/min');
+        console.log(this);
+        this.variableIncrease = 0;
+        this.standardIncrease = 4;
+        this.extraClass = 'lageOpwek';
     }
 
     componentDidMount() {
@@ -61,8 +78,8 @@ class SmartSource extends Component {
 
     increaseValue() {
         let self = this;
-        let newValue = self.state.kWhValue + Math.floor(Math.random() * 30) + 50;
-        this.state.contract.newMeterValue(9, newValue, { from: this.props.accounts[0] });
+        let newValue = self.state.kWhValue + Math.floor(Math.random() * this.variableIncrease) + this.standardIncrease;
+        this.state.contract.newMeterValue(this.props.currentTime.valueOf(), newValue, { from: this.props.accounts[0], gas: 1000000 });
         this.setState({
             kWhValue: newValue
         });
@@ -80,6 +97,9 @@ class SmartSource extends Component {
 
 
     renderConnection() {
+        if(this.props.domID === 'SUP4') {
+            return <div id="chargeLineBackup" />
+        }
         if(this.props.domID !== 'SUP1') {
             return null;
         }

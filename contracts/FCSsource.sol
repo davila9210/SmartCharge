@@ -15,9 +15,9 @@ contract FCSsource {
 
     uint public impossibleDeliveries;
 
-    event DropChargingstation(
-        uint dealId,
-        uint chargestationId
+    event DropUser(
+        uint val1,
+        uint val2
     );
 
     function FCSsource(address _supplier) public {
@@ -27,7 +27,7 @@ contract FCSsource {
     }
 
     function newMeterValue(uint time, uint value) public {
-        if(timestamps.length > 0) {
+        if(timestamps.length > 0 && activeDeals.length > 0) {
             validateAvailability(getLastMeterValue(), value);
         }
         meterValues[time] = value;
@@ -51,8 +51,8 @@ contract FCSsource {
         else {
             impossibleDeliveries = 0;
         }
-        if(impossibleDeliveries > 5) {
-            DropChargingstation(oldestDeal, saleDeals[oldestDeal].chargestationId);
+        if(impossibleDeliveries > 3) {
+            DropUser(sumDeals, oldestDeal);
         }
         return availableNow;
     }
@@ -82,16 +82,6 @@ contract FCSsource {
         return indexOfDeal;
     }
 
-//    function removeFromArray(uint[] array, uint index) internal returns(uint[]) {
-//        if (index >= array.length) return;
-//
-//        for (uint i = index; i<array.length-1; i++){
-//            array[i] = array[i+1];
-//        }
-//        delete array[array.length-1];
-//        array.length--;
-//        return array;
-//    }
     function removeFromArray(uint[] array, uint index) internal returns(uint[] value) {
         if (index >= array.length) return;
 
@@ -118,11 +108,3 @@ contract FCSsource {
         return saleDeals[dealId].chargestationId;
     }
 }
-
-//saleDeals are removed after stopcharge
-//
-//when newmetervalue; check all saleDeals. If can not deliver; fire event to charge station. He will look for new source
-//if (newvalue - vorige value) > sum all sale deals
-//    cannotdeliver ++;
-//
-//Als cannotdeliver > 5 dan event firen met als parameter welk chargestation weg moet. Chargestation sluit nieuwe deal

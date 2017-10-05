@@ -61,9 +61,23 @@ button.source {
     margin-top: 5px;
 }
 
+#chargeLineBackup {
+    border-top: 7px dashed #1eb71e;
+    width: 300px;
+    height: 4px;
+    transform: rotate(-60deg);
+    margin-top: -207px;
+    margin-left: -40px;
+    display: none;
+}
 
-
-
+.lageOpwek {
+    box-shadow: 10px -10px red;
+    -moz-box-shadow: 10px -10px  red;
+    -webkit-box-shadow: 10px -10px  red;
+    -o-box-shadow: 10px -10px  red;
+    border-radius:100px;
+}
 
 /** app content */
 #iPhone {
