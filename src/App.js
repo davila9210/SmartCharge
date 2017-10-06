@@ -178,7 +178,7 @@ class App extends DemoController {
                     <button id="playButton3" className="last" onClick={this.popupCar3.bind(this)}>Start car 3</button>
                     {regDevices}
                     <button style={{width:'300px'}} onClick={this.retrieveChargestations.bind(this)}>Retrieve registered charge stations</button>
-                    <button style={{width:'300px'}} onClick={this.retrieveSmartSources.bind(this)}>Retrieve suppliers</button>
+                    <button style={{width:'300px'}} onClick={this.retrieveSmartSources.bind(this)}>Retrieve source information</button>
                     <br />
                     <div className="dial">
                         <div className="dot" />
