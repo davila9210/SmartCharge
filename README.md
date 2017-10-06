@@ -10,7 +10,7 @@ For the Blockchain for Social Impact Hackathon
     npm install
     ```
 
-1. Install truffle and an ethereum client. For local development, try EthereumJS TestRPC.
+1. Install truffle and an ethereum client. For now, use TestRPC
     ```javascript
     npm install -g truffle // Version 3.0.5+ required.
     npm install -g ethereumjs-testrpc
@@ -27,7 +27,7 @@ For the Blockchain for Social Impact Hackathon
     truffle migrate
     ```
 
-4. Run the webpack server for front-end hot reloading. For now, smart contract changes must be manually recompiled and migrated.
+4. Run the webpack server
     ```javascript
     npm run start
     ```
