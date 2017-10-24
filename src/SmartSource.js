@@ -57,7 +57,7 @@ class SmartSource extends DemoControllerSource {
     }
 
     clickedSource() {
-        console.log('Clicked source - supply to 2kwh/min');
+        console.log('Clicked source - supply to 4kwh/min');
         console.log(this);
         this.variableIncrease = 0;
         this.standardIncrease = 4;

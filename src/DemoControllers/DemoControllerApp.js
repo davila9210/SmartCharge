@@ -27,15 +27,16 @@ class DemoController extends Component {
     popupVideo() {
         document.getElementById('overlay').className = 'show';
         document.getElementById('popup').className = 'show';
-        document.getElementById('videoPlayer').play();
-        console.log('Video screen');
-        setTimeout(this.popupWindow.bind(this), 8000)
+        // document.getElementById('videoPlayer').play();
+        // console.log('Video screen');
+        // setTimeout(this.popupWindow.bind(this), 8000)
+        this.popupWindow();
         //new react component
     }
 
     popupWindow() {
         console.log('iPhone app - car 1');
-        document.getElementById('videoPlayer').pause();
+        // document.getElementById('videoPlayer').pause();
         document.getElementById('overlay').className = 'show';
         document.getElementById('popup').className = 'show';
         document.getElementById('popup').style.width = '300px';
@@ -63,6 +64,7 @@ class DemoController extends Component {
     }
 
     popupCar2() {
+        document.getElementById('playButton2').style.display = 'none';
         console.log('iPhone app - car 1');
         this.currentChargeStation = _.filter(this.state.registeredDevices, {type: 'SmartChargestation'});
         this.currentChargeStation = _.find(this.currentChargeStation, {id: 143});

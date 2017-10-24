@@ -107,7 +107,6 @@ class MobileApp extends Component {
     chooseSource(chosenSource) {
         let lineId = this.props.chargeStation.description.slice(-1);
         document.getElementById('chargeLine' + lineId).style.display = 'block';
-        document.getElementById('playButton2').style.display = 'inline-block';
 
         let chargeAmount = document.getElementById('slider').value / 10;
         let price = chosenSource.price * chargeAmount;
@@ -119,27 +118,35 @@ class MobileApp extends Component {
                 // Listen to source (might not be available supply)
                 chosenSource.contract.DropUser(function(error, result) {
                     if(result.args.chargestationId.c[0] === self.props.chargeStation.id) {
-                        console.log('Dropping user! ' + self.props.chargeStation.id + ' not generating enough energy');
-                        console.log('Falling back to 2nd source');
+                        console.log('Dropping station ' + self.props.chargeStation.id + ', energy source not available' + result.args.meterValue.c[0]);
+                        console.log('Deal ' + result.args.dealId.c[0] + ' falling back to 2nd source');
                         let lineId = self.props.chargeStation.description.slice(-1);
                         document.getElementById('chargeLine' + lineId).style.borderTop = '7px dashed red';
                         document.getElementById('chargeLineBackup').style.display = 'block';
                         //TODO switch from source (enddeal + newdeal)
+                        self.props.FCSdeal.finishDeal(result.args.dealId.c[0], result.args.meterValue.c[0], { from: self.props.account });
                     }
                 });
                 // Listen to when charge stations stops
                 let watch = self.props.FCSdeal.StopCharge(function(error, result){
-                    watch.stopWatching();
-                    document.getElementById('chargeLine' + lineId).style.display = 'none';
-                    console.log(result);
-                    if(self._mounted) {
-                        self.setState({
-                            step: 2,
-                            stepInfo: {
-                                chargedAt: result.args.chargeStation,
-                                newValue: result.args.endValueStation
-                            }
-                        })
+                    if(result.args.chargeStation.c[0] === self.props.chargeStation.id) {
+                        watch.stopWatching();
+                        let lineId = self.props.chargeStation.description.slice(-1);
+                        document.getElementById('chargeLine' + lineId).style.display = 'none';
+                        console.log('lineid' + lineId);
+                        if(lineId === 1){
+                            document.getElementById('chargeLineBackup').style.display = 'none';
+                        }
+                        console.log(result);
+                        if (self._mounted) {
+                            self.setState({
+                                step: 2,
+                                stepInfo: {
+                                    chargedAt: result.args.chargeStation,
+                                    newValue: result.args.endValueStation
+                                }
+                            })
+                        }
                     }
                 });
                 // Show display; car is charging now

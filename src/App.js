@@ -63,7 +63,7 @@ class App extends DemoController {
             return null;
         }
 
-        let regDevices = _.map(this.state.registeredDevices, function(device, t){
+        let regDevices = _.map(_.reject(this.state.registeredDevices, { type: 'CustomerApp' }), function(device, t){
             return <div key={t}>{device.type} : {device.contractAddress} {device.id} </div>;
         });
 
@@ -173,9 +173,9 @@ class App extends DemoController {
                     <GoogleMaps />
                 </div>
                 <div className="rightContainer">
-                    <button id="playButton" onClick={this.popupWindow.bind(this)}>Start car 1</button>
-                    <button id="playButton2" onClick={this.popupCar2.bind(this)}>Start car 2</button>
-                    <button id="playButton3" className="last" onClick={this.popupCar3.bind(this)}>Start car 3</button>
+                    <button id="playButton" onClick={this.playNow.bind(this)}>Start car 1</button>
+                    <button id="playButton2" onClick={this.playCar2.bind(this)}>Start car 2</button>
+                    <button id="playButton3" className="last" onClick={this.playCar3.bind(this)}>Start car 3</button>
                     {regDevices}
                     <button style={{width:'300px'}} onClick={this.retrieveChargestations.bind(this)}>Retrieve registered charge stations</button>
                     <button style={{width:'300px'}} onClick={this.retrieveSmartSources.bind(this)}>Retrieve source information</button>
