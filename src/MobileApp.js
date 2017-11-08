@@ -4,12 +4,12 @@ import _ from 'underscore';
 class MobileApp extends Component {
     constructor(props) {
         super(props);
-        this.sources = this.suppliersAPI();
         this.dso = this.getDSOinfo();
         this.state = {
             balance: this.props.web3.eth.getBalance(this.props.account),
             step: 0,
-            chargeAmount: 5
+            chargeAmount: 5,
+            sources: this.suppliersAPI()
         };
         this.props.registerDevice({
             type: 'CustomerApp',
@@ -38,7 +38,7 @@ class MobileApp extends Component {
         let self = this;
         let phoneContent = null;
         if(this.state.step === 0) {
-            let sourceElements = this.sources.map(function (source, t) {
+            let sourceElements = this.state.sources.map(function (source, t) {
                 return <div key={t}>
                     <button className="source" onClick={self.chooseSource.bind(self, source)}>{source.description}<br />
                         {(self.state.chargeAmount * source.price).toFixed(2) + ' (' + source.price + '/kwh)'}</button>
@@ -60,7 +60,16 @@ class MobileApp extends Component {
                         {/*<button>(Almost)<br />full</button>*/}
                         <div className="appDetailText">You car will get <span id="chargeAmount">5</span> kwh</div>
                     </div>
-                    <br />Current DSO price: {this.dso.price}<br/><br/>
+                    <br />Flexible charging?<br />
+                    <select onChange={this.changeFlexibleCharging.bind(this)}>
+                        <option value="No">No</option>
+                        <option value="6">Ready in 6 hours</option>
+                        <option value="8">Ready in 8 hours</option>
+                        <option value="12">Ready in 12 hours</option>
+                        <option value="18">Ready in 18 hours</option>
+                        <option value="24">Ready in 24 hours</option>
+                        <option value="36">Ready in 36 hours</option>
+                    </select><br /><br />
                     {sourceElements}
                 </div>
             </div>
@@ -83,6 +92,16 @@ class MobileApp extends Component {
         </div>
     }
 
+    changeFlexibleCharging(e) {
+        var newSources = JSON.parse(JSON.stringify(this.state.sources));
+        _.each(newSources, function(source){
+            source.price -= 0.002;
+        });
+        this.setState({
+            sources: newSources
+        })
+    }
+
     sliderChanged(){
         let chosenValue = document.getElementById('slider').value;
         document.getElementById('sliderOutput').innerHTML = chosenValue;
@@ -97,7 +116,7 @@ class MobileApp extends Component {
      *
      * chosenSource.contractAddress is source
      * chosenSource.price is sourcePrice
-     * chosenSource.supplier is supplier
+     * chosenSource.supplier is supplierf
      * this.stationInfo[1] is dso
      * this.dso.price is dsoPrice
      * this.props.chargeStation.id is chargeStationId
@@ -124,7 +143,7 @@ class MobileApp extends Component {
                         document.getElementById('chargeLine' + lineId).style.borderTop = '7px dashed red';
                         document.getElementById('chargeLineBackup').style.display = 'block';
                         //TODO switch from source (enddeal + newdeal)
-                        self.props.FCSdeal.finishDeal(result.args.dealId.c[0], result.args.meterValue.c[0], { from: self.props.account });
+                        //removed for demo purposes self.props.FCSdeal.finishDeal(result.args.dealId.c[0], result.args.meterValue.c[0], { from: self.props.account });
                     }
                 });
                 // Listen to when charge stations stops
